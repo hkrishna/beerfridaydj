@@ -1,0 +1,9 @@
+<div id="player">
+  <%= submit_tag('Play!', :onclick => remote_function(:update => 'player', :url => {:action => :embed, :users => @users.map(&:id)})) %>
+</div>
+
+<%- @users.each do |user| %>
+<%= check_box_tag(user.display_name, user.id, true) %>
+<%= label_tag(user.display_name, user.display_name) %>
+<br>
+<%- end %>

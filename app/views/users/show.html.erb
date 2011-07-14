@@ -1,0 +1,15 @@
+<h1><%= @user.display_name %></h1>
+
+<h2>Videos</h2>
+
+<ul>
+<%- @user.videos.each do |video| %>
+<li>
+  <%= image_tag(video.thumbnail, :class => 'video-thumbnail') %>
+  <span class="video-title"><%= video.title %></span>
+  <%- if video.user == @logged_in_user %>
+    <%= link_to('Delete', video_path(video), :method => :delete) %>
+  <%- end %>
+</li>
+<%- end %>
+</ul>
