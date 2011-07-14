@@ -7,7 +7,6 @@ function onYouTubePlayerReady(playerid) {
 }
 
 function onytplayerStateChange(stateId) {
-  console.log(stateId);
   if(stateId == 0) {
     new Ajax.Updater('player',
                      '/player/embed?' + selectedUsersParams() + '&' + seenVideoParams(),
@@ -16,7 +15,7 @@ function onytplayerStateChange(stateId) {
 }
 
 function selectedUsers() {
-  return $$('input[type=checkbox]').select(function(e) { return e.checked }).map(function(e) { return e.value })
+  return $$('input[type=checkbox]').select(function(e) { return e.checked; }).map(function(e) { return e.value; });
 }
 
 function selectedUsersParams() {
