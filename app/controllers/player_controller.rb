@@ -1,12 +1,12 @@
 class PlayerController < ApplicationController
 
+  before_filter(:select_song, :only => :embed)
 
   def index
     @users = User.all
   end
 
   def embed
-    @video = select_song(params[:users], params[:seenVideos])
     render(:partial => 'embed')
   end
 
@@ -18,15 +18,21 @@ class PlayerController < ApplicationController
   #
   # Can't select the user first, because the user might not have
   # videos.
-  def select_song(user_ids, youtube_ids)
-    if youtube_ids.present?
-      videos = Video.all(:conditions => ['user_id IN (?) AND youtube_id NOT IN (?)', user_ids, youtube_ids])
+  def select_song
+    if params[:seenVideos].present?
+      videos = Video.all(:conditions => ['user_id IN (?) AND youtube_id NOT IN (?)',
+                                         params[:users],
+                                         params[:seenVideos]],
+                         :include => :user)
     else
-      videos = Video.all(:conditions => ['user_id IN (?)', user_ids])
+      videos = Video.all(:conditions => ['user_id IN (?)', params[:users]],
+                         :include => :user)
     end
-    videos = videos.group_by(&:user_id)
-    user = videos.keys.sample
-    videos[user].sample
+
+    videos = videos.group_by(&:user)
+
+    @user  = videos.keys.sample
+    @video = videos[@user].sample
   end
 
 end
