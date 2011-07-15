@@ -2,7 +2,9 @@ class VideosController < ApplicationController
 
   def create
     if @logged_in_user
-      Video.create_from_url(params[:url], @logged_in_user)
+      unless Video.create_from_url(params[:url], @logged_in_user)
+        flash[:notice] = "Video could not be added.  Probably can't be embedded."
+      end
       redirect_to(:controller => :users, :action => :show, :id => @logged_in_user)
     else
       redirect_to(:controller => :users)

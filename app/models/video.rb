@@ -7,6 +7,8 @@ class Video < ActiveRecord::Base
       youtube_id = extract_youtube_id(url)
       video = youtube_client.video_by(youtube_id)
 
+      return false if video.noembed
+
       thumbnail = video.thumbnails.detect {|thumbnail| thumbnail.height < 100}.try(:url)
 
       user.videos.create(:youtube_id => youtube_id, :title => video.title, :thumbnail => thumbnail)

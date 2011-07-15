@@ -8,6 +8,9 @@
   <%= csrf_meta_tag %>
 </head>
 <body>
+<%- if flash[:notice] %>
+  <div id="notice"><%= flash[:notice] %></div>
+<%- end %>
 <%- if @logged_in_user %>
   <div id="greeting">
     You're signed in as <%= @logged_in_user.email %>.
