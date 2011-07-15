@@ -3,7 +3,7 @@ class PlayerController < ApplicationController
   before_filter(:select_song, :only => :embed)
 
   def index
-    @users = User.all
+    @users = User.all(:order => 'email ASC')
   end
 
   def embed
