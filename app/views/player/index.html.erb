@@ -1,5 +1,5 @@
 <div id="player">
-  <%= submit_tag('Play!', :onclick => remote_function(:update => 'player', :url => {:action => :embed, :users => @users.map(&:id)})) %>
+  <%= button_to_function('Play!', 'playNext()') %>
 </div>
 
 <%- @users.each do |user| %>

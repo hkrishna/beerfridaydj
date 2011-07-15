@@ -8,10 +8,14 @@ function onYouTubePlayerReady(playerid) {
 
 function onytplayerStateChange(stateId) {
   if(stateId == 0) {
-    new Ajax.Updater('player',
-                     '/player/embed?' + selectedUsersParams() + '&' + seenVideoParams(),
-                     {asynchronous:true, evalScripts:true});
+    playNext();
   };
+}
+
+function playNext() {
+  new Ajax.Updater('player',
+                   '/player/embed?' + selectedUsersParams() + '&' + seenVideoParams(),
+                   {asynchronous:true, evalScripts:true});
 }
 
 function selectedUsers() {
