@@ -1,6 +1,5 @@
 class PlayerController < ApplicationController
 
-  respond_to(:json, :only => [:next_song])
 
   def index
     @users = User.all

@@ -4,7 +4,6 @@ BeerFridayDJ::Application.routes.draw do
   resources :sessions
 
   match 'player' => 'player#index'
-  match 'player/next_song' => 'player#next_song'
   match 'player/embed' => 'player#embed'
 
   # The priority is based upon order of creation:
