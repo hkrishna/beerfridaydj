@@ -22,6 +22,11 @@ ul.unstyled li.video-block{
   overflow:hidden;
 }
 
+ul.unstyled li.video-block .video-title{
+  height:36px;
+  overflow:hidden;
+}
+
 ul.unstyled li.adjustHeight{
   height:25px;
 }

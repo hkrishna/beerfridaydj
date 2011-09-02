@@ -1,6 +1,6 @@
 <section id="users">
   <div class="page-header">
-    <h3><%= @user.display_name %></h3>
+    <h3><%= @user.display_name %>'s music</h3>
   </div>
   <div class="row">
     <div class="span16 columns">
@@ -8,7 +8,10 @@
       <%- @user.videos.each do |video| %>
       <li class="video-block">
         <%= image_tag(video.thumbnail, :class => 'video-thumbnail') %>
-        <div class="user-name"><%= video.title %>
+        <div class="user-name">
+          <div class="video-title">
+            <%= video.title %>
+          </div>
           <%- if video.user == @logged_in_user %>
             <%= link_to('Delete', video_path(video), :method => :delete) %>
           <%- end %>

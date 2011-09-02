@@ -6,6 +6,8 @@
   <%= javascript_include_tag :defaults %>
   <%= javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js' %>
   <%= csrf_meta_tag %>
+</head>
+<body>
   <div class="topbar">
     <div class="fill">
       <div class="container">
@@ -19,8 +21,6 @@
       </div>
     </div>
   </div>
-</head>
-<body>
   <div id="masthead" class="container">
     <%- if flash[:notice] %>
       <div id="notice_container" class="alert-message error">
