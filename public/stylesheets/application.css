@@ -19,6 +19,7 @@ ul.unstyled li.video-block{
   margin-left:20px;
   width:120px;
   height:150px;
+  overflow:hidden;
 }
 
 ul.unstyled li.adjustHeight{
