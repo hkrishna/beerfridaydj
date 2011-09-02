@@ -6,34 +6,69 @@
   <%= javascript_include_tag :defaults %>
   <%= javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js' %>
   <%= csrf_meta_tag %>
+  <div class="topbar">
+    <div class="fill">
+      <div class="container">
+        <h3><a href="/">Beer Friday DJ!</a></h3>
+        <%- if @logged_in_user %>
+          <h5 id="greeting">
+            Hey <%= @logged_in_user.email %>.
+            <%= link_to('Sign out?', session_path(@logged_in_user.id), :method => :delete) %>
+          </h5>
+        <%- end%>
+      </div>
+    </div>
+  </div>
 </head>
 <body>
-<%- if flash[:notice] %>
-  <div id="notice"><%= flash[:notice] %></div>
-<%- end %>
-<%- if @logged_in_user %>
-  <div id="greeting">
-    You're signed in as <%= @logged_in_user.email %>.
-    <%= link_to('Sign out?', session_path(@logged_in_user.id), :method => :delete) %>
+  <div id="masthead" class="container">
+    <%- if flash[:notice] %>
+      <div id="notice_container" class="alert-message error">
+        <a class="close" onclick="hideNotice('notice_container');" href="#">×</a>
+        <p><strong>Oh snap!</strong> <%= flash[:notice] %></p>
+      </div>
+    <%- end %>
+    <%- if @logged_in_user %>
+      <section id="add-video_container">
+        <div id="add-video">
+          <%= form_tag(:controller => :videos, :action => :create) %>
+            <fieldset>
+              <legend>
+                Office Music for Office People!
+              </legend>
+              <div class="clearfix">
+                <%= label_tag('url') %>
+                <div class="input">
+                  <%= text_field_tag('url',"", :placeholder => "You Should be adding lots of videos", :class => "xlarge") %>
+                  <%= submit_tag('Add video!', :class=>"btn primary") %>
+                </div>
+              </div>
+            </fieldset>
+          </form>
+        </div>
+      </section>
+    <%- else %>
+      <section id="sign-in_container">
+        <div id="sign-in">
+          <%= form_tag(:controller => :sessions,:action => :create) %>
+            <fieldset>
+              <legend>
+                Office Music for Office People!
+              </legend>
+              <div class="clearfix">
+                <%= label_tag('email') %>
+                <div class="input">
+                  <%= email_field_tag('email',"", :placeholder => "Just enter your email address", :class => "xlarge") %>
+                  <%= submit_tag('Sign in!', :class=>"btn primary") %>
+                </div>
+              </div>
+            </fieldset>
+          </form>
+        </div>
+      </section>
+    <%- end %>
+
+    <%= yield %>
   </div>
-
-  <div id="add-video">
-    <%= form_tag(:controller => :videos, :action => :create) %>
-      <%= label_tag('url') %>
-      <%= text_field_tag('url') %>
-      <%= submit_tag('Add video!') %>
-      You should be adding lots of videos.
-    </form>
-  </div>
-<%- else %>
-  <%= form_tag(:controller => :sessions,:action => :create) %>
-    <%= label_tag('email') %>
-    <%= email_field_tag('email') %>
-    <%= submit_tag('Sign in!') %>
-  </form>
-<%- end %>
-
-<%= yield %>
-
 </body>
 </html>

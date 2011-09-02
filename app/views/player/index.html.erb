@@ -1,9 +1,23 @@
-<div id="player">
-  <%= button_to_function('Play!', 'playNext()') %>
-</div>
-
-<%- @users.each do |user| %>
-<%= check_box_tag(user.display_name, user.id, true) %>
-<%= label_tag(user.display_name, user.display_name) %>
-<br>
-<%- end %>
+<section id="player_container">
+  <div class="page-header">
+    <h3>Let's Party!</h3>
+  </div>
+  <div id="player">
+    <%= button_to_function('Hit it!', 'playNext()', :class => "btn primary") %>
+  </div>
+  <section id="user-list_container">
+    <h5>
+      Party People
+    </h5>
+    <form class="form-stacked">
+      <ul class="unstyled">
+      <%- @users.each do |user| %>
+        <li class="adjustHeight">
+          <%= check_box_tag(user.display_name, user.id, true, :class => "adjustTop") %>
+          <%= label_tag(user.display_name, user.display_name, :class => "adjustPosition") %>
+        </li>
+      <%- end %>
+      </ul>
+    </form>
+  </section>
+</section>

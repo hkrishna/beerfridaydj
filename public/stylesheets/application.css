@@ -1,3 +1,35 @@
-.video-count {
-  color: #ddd;
+h5#greeting{
+  float:right;
+  color:whiteSmoke;
+  font-weight:400;
+}
+
+#masthead{
+  margin-top: 40px;
+  padding:10px;
+}
+
+section{
+  padding-top: 40px;
+}
+
+ul.unstyled li.video-block{
+  display:inline;
+  float:left;
+  margin-left:20px;
+  width:120px;
+  height:150px;
+}
+
+ul.unstyled li.adjustHeight{
+  height:25px;
+}
+
+ul.unstyled li.adjustHeight input.adjustTop{
+  float:left;
+  margin:5px;
+}
+
+ul.unstyled li.adjustHeight label.adjustPosition{
+ margin-left:20px;
 }

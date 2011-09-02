@@ -1,5 +1,18 @@
-<%= form_tag(:action => :create) %>
-  <%= label_tag('email') %>
-  <%= email_field_tag('email') %>
-  <%= submit_tag('Sign in!') %>
-</form>
+<section id="sign-in_container">
+  <div id="sign-in">
+    <%= form_tag(:action => :create) %>
+      <fieldset>
+        <legend>
+          Office Music for Office People!
+        </legend>
+        <div class="clearfix">
+          <%= label_tag('email') %>
+          <div class="input">
+            <%= email_field_tag('email',"", :placeholder => "Just enter your email address", :class => "xlarge") %>
+            <%= submit_tag('Sign in!', :class=>"btn primary") %>
+          </div>
+        </div>
+      </fieldset>
+    </form>
+  </div>
+</section>

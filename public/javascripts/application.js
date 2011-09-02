@@ -29,3 +29,10 @@ function selectedUsersParams() {
 function seenVideoParams() {
   return "seenVideos[]=" + seenVideos.join("&seenVideos[]=");
 }
+
+function hideNotice(id){
+  if (document.getElementById){
+    var noticeContainer = document.getElementById(id);
+    noticeContainer.style.display = "none";
+  }
+}
