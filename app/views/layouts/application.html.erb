@@ -12,10 +12,20 @@
     <div class="fill">
       <div class="container">
         <h3><a href="/">Beer Friday DJ!</a></h3>
+        <h3 class="float-left">
+          <span>|</span>
+          <span>Office Music for Office People</span>
+        </h3>
         <%- if @logged_in_user %>
           <h5 id="greeting">
-            Hey <%= @logged_in_user.email %>.
-            <%= link_to('Sign out?', session_path(@logged_in_user.id), :method => :delete) %>
+            Hey <%= @logged_in_user.email %>,
+            <%= link_to('Play music', "/player") %>
+            <span>|<span>
+            <%= link_to('Sign out', session_path(@logged_in_user.id), :method => :delete) %>
+          </h5>
+        <%- else %>
+          <h5 id="greeting">
+            <%= link_to('Play music', "/player") %>
           </h5>
         <%- end%>
       </div>
@@ -33,15 +43,9 @@
         <div id="add-video">
           <%= form_tag(:controller => :videos, :action => :create) %>
             <fieldset>
-              <legend>
-                Office Music for Office People!
-              </legend>
-              <div class="clearfix">
-                <%= label_tag('url') %>
-                <div class="input">
-                  <%= text_field_tag('url',"", :placeholder => "You Should be adding lots of videos", :class => "xlarge") %>
-                  <%= submit_tag('Add video!', :class=>"btn primary") %>
-                </div>
+              <div class="clearfix row">
+                <%= text_field_tag('url',"", :placeholder => "Enter Youtube URL here | You should be adding lots of videos", :class => "xlarge span10") %>
+                <%= submit_tag('Add video!', :class=>"btn primary span2") %>
               </div>
             </fieldset>
           </form>
@@ -49,18 +53,12 @@
       </section>
     <%- else %>
       <section id="sign-in_container">
-        <div id="sign-in">
+        <div id="sign-in" class="row">
           <%= form_tag(:controller => :sessions,:action => :create) %>
             <fieldset>
-              <legend>
-                Office Music for Office People!
-              </legend>
-              <div class="clearfix">
-                <%= label_tag('email') %>
-                <div class="input">
-                  <%= email_field_tag('email',"", :placeholder => "Just enter your email address", :class => "xlarge") %>
-                  <%= submit_tag('Sign in!', :class=>"btn primary") %>
-                </div>
+              <div class="clearfix row">
+                <%= email_field_tag('email',"", :placeholder => "Just enter your email address", :class => "xlarge span10") %>
+                <%= submit_tag('Sign in!', :class=>"btn primary span2") %>
               </div>
             </fieldset>
           </form>

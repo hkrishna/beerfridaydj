@@ -2,6 +2,7 @@ h5#greeting{
   float:right;
   color:whiteSmoke;
   font-weight:400;
+  font-size:12px;
 }
 
 #masthead{
@@ -28,7 +29,8 @@ ul.unstyled li.video-block .video-title{
 }
 
 ul.unstyled li.adjustHeight{
-  height:25px;
+  height:30px;
+  margin-left:0px;
 }
 
 ul.unstyled li.adjustHeight input.adjustTop{
@@ -37,5 +39,29 @@ ul.unstyled li.adjustHeight input.adjustTop{
 }
 
 ul.unstyled li.adjustHeight label.adjustPosition{
- margin-left:20px;
+ margin-left:28px;
+ max-width:180px;
+ overflow:hidden;
+}
+
+.name_container{
+  overflow:hidden;
+  max-width: 125px;
+  margin-right: 2px;
+}
+
+.float-left{
+  float:left;
+}
+
+.float-right{
+  float:right;
+}
+
+.input-prepend .add-on.spl,.input-append .add-on.spl{
+  border-right-width:1px;
+  -webkit-border-radius:3px;
+  -moz-border-radius:3px;
+  border-radius:3px;
+  margin-right:5px;
 }

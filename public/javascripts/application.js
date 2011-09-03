@@ -36,3 +36,12 @@ function hideNotice(id){
     noticeContainer.style.display = "none";
   }
 }
+
+function toggleClass(elem){
+  var parentElem = elem.parentNode;
+  if (!elem.checked){
+   parentElem.className = parentElem.className.replace(/\bactive\b/,'');
+  } else {
+    parentElem.className += " active";
+  }
+}
