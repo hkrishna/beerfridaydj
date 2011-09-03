@@ -45,3 +45,14 @@ function toggleClass(elem){
     parentElem.className += " active";
   }
 }
+
+function validateForm(){
+  var elem = document.forms["the_form"]["email"] ? document.forms["the_form"]["email"] : document.forms["the_form"]["url"],
+      parentElem = elem.parentNode;
+  parentElem.className = parentElem.className.replace(/\berror\b/,'');
+  if (elem.value==null || elem.value==""){
+    parentElem.className += " error";
+    return false;
+  }
+  return true;
+}

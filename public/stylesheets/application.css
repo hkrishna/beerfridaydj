@@ -65,3 +65,12 @@ ul.unstyled li.adjustHeight label.adjustPosition{
   border-radius:3px;
   margin-right:5px;
 }
+
+.fields_container .help-inline{
+  display:none;
+  padding:5px 10px;
+}
+
+.fields_container.error .help-inline{
+  display:inline-block;
+}
