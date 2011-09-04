@@ -10,8 +10,8 @@
                      "ytapiplayer", "425", "356", "8", null, null, params, atts);
 </script>
 <div id="attribution">
-  <span class="video-title"><%= @video.title %></span>
+  <strong class="video-title"><%= @video.title %></strong>
   as added by
-  <span class="user-name"><%= @user.display_name %></span>
+  <strong class="user-name"><%= @user.display_name %></strong>
 </div>
 <%= button_to_function('Skip!', 'playNext()', :class => "btn primary") %>
