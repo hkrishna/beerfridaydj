@@ -11,7 +11,7 @@ h5#greeting{
 }
 
 section{
-  padding-top: 40px;
+  padding-top: 5px;
 }
 
 ul.unstyled li.video-block{
@@ -42,6 +42,11 @@ ul.unstyled li.adjustHeight label.adjustPosition{
  margin-left:28px;
  max-width:180px;
  overflow:hidden;
+ color:gray;
+}
+
+ul.unstyled li.adjustHeight .selected label.adjustPosition{
+  color:#404040;
 }
 
 .name_container{
@@ -56,6 +61,14 @@ ul.unstyled li.adjustHeight label.adjustPosition{
 
 .float-right{
   float:right;
+}
+
+.align-center{
+  text-align:center;
+}
+
+#form_fields_block input.xlarge{
+  width:375px;
 }
 
 .input-prepend .add-on.spl,.input-append .add-on.spl{
@@ -73,4 +86,17 @@ ul.unstyled li.adjustHeight label.adjustPosition{
 
 .fields_container.error .help-inline{
   display:inline-block;
+}
+
+.fields_container.error ::-webkit-input-placeholder {
+   color: #9D261D;
+}
+
+.fields_container.error :-moz-placeholder {
+   color: #9D261D;
+}
+
+#user-list_container .input-prepend .active,#user-list_container .input-append .active{
+  background:#BCDDFF;
+  border-color:#BCDDFF;
 }

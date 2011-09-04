@@ -39,10 +39,13 @@ function hideNotice(id){
 
 function toggleClass(elem){
   var parentElem = elem.parentNode;
+  var grandParentElem = parentElem.parentNode;
   if (!elem.checked){
    parentElem.className = parentElem.className.replace(/\bactive\b/,'');
+   grandParentElem.className = grandParentElem.className.replace(/\bselected\b/,'');
   } else {
     parentElem.className += " active";
+    grandParentElem.className += " selected";
   }
 }
 
