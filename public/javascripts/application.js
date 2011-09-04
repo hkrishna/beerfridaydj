@@ -78,3 +78,21 @@ function selectAll(all){
   }
   return false;
 }
+
+function selectSome(){
+  var elem = document.forms["guest_list"] ? document.forms["guest_list"] : false;
+  if (elem) {
+    var boxes = elem["live"];
+    for(var i=0; i<boxes.length;i++){
+      var randomnumber = Math.floor(Math.random()*3),
+          videocount = boxes[i].parentNode.next().getAttribute("data-attr-count");
+      if (randomnumber<2 && videocount!=0){
+        boxes[i].checked = true;
+      } else {
+        boxes[i].checked = false;
+      }
+      toggleClass(boxes[i]);
+    }
+  }
+  return false;
+}

@@ -11,9 +11,11 @@
         People in the Room
         <small>
           <span>[</span>
-          <a href="#" onclick="selectAll(true)">All</a>
+          <a href="#" onclick="return selectAll(true)">All</a>
           <span>|</span>
-          <a href="#" onclick="selectAll(false)">None</a>
+          <a href="#" onclick="return selectSome()">Some</a>
+          <span>|</span>
+          <a href="#" onclick="return selectAll(false)">None</a>
           <span>]</span>
         </small>
       </h5>
@@ -23,7 +25,7 @@
           <li class="adjustHeight span4">
             <div class="input-prepend selected">
               <label class="add-on active spl"><%= check_box_tag(user.display_name, user.id, true, :name => "live", :onclick => "toggleClass(this)") %></label>
-              <%= label_tag(user.display_name, truncate(user.display_name, :length => 20), :class => "adjustPosition") %>
+              <%= label_tag(user.display_name, truncate(user.display_name, :length => 20), :class => "adjustPosition", :"data-attr-count" => "#{user.videos.size}") %>
             </div>
           </li>
         <%- end %>
