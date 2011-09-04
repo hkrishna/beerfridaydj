@@ -40,10 +40,9 @@ function hideNotice(id){
 function toggleClass(elem){
   var parentElem = elem.parentNode;
   var grandParentElem = parentElem.parentNode;
-  if (!elem.checked){
-   parentElem.className = parentElem.className.replace(/\bactive\b/,'');
-   grandParentElem.className = grandParentElem.className.replace(/\bselected\b/,'');
-  } else {
+  parentElem.className = parentElem.className.replace(/\b active\b/,'');
+  grandParentElem.className = grandParentElem.className.replace(/\b selected\b/,'');
+  if (elem.checked){
     parentElem.className += " active";
     grandParentElem.className += " selected";
   }
@@ -58,4 +57,24 @@ function validateForm(){
     return false;
   }
   return true;
+}
+
+function selectAll(all){
+  var elem = document.forms["guest_list"] ? document.forms["guest_list"] : false;
+  if (elem) {
+    var boxes = elem["live"];
+    for(var i=0; i<boxes.length;i++){
+      if (all){
+        if (!boxes[i].checked){
+          boxes[i].checked = true;
+        }
+      } else {
+        if (boxes[i].checked){
+          boxes[i].checked = false;
+        }
+      }
+      toggleClass(boxes[i]);
+    }
+  }
+  return false;
 }

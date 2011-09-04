@@ -8,14 +8,21 @@
     </div>
     <div id="user-list_container" class="span8">
       <h5>
-        Party People
+        People in the Room
+        <small>
+          <span>[</span>
+          <a href="#" onclick="selectAll(true)">All</a>
+          <span>|</span>
+          <a href="#" onclick="selectAll(false)">None</a>
+          <span>]</span>
+        </small>
       </h5>
-      <form class="form-stacked">
+      <form id="guest_list" name="guest_list" class="form-stacked">
         <ul class="unstyled">
         <%- @users.each do |user| %>
           <li class="adjustHeight span4">
             <div class="input-prepend selected">
-              <label class="add-on active spl"><%= check_box_tag(user.display_name, user.id, true, :onclick => "toggleClass(this)") %></label>
+              <label class="add-on active spl"><%= check_box_tag(user.display_name, user.id, true, :name => "live", :onclick => "toggleClass(this)") %></label>
               <%= label_tag(user.display_name, truncate(user.display_name, :length => 20), :class => "adjustPosition") %>
             </div>
           </li>
