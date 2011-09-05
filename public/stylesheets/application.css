@@ -67,6 +67,18 @@ ul.unstyled li.adjustHeight .selected label.adjustPosition{
   text-align:center;
 }
 
+.hidden{
+  display:none;
+}
+
+.legroom{
+  margin-bottom:10px;
+}
+
+.headroom{
+  margin-top:10px;
+}
+
 #form_fields_block input.xlarge{
   width:375px;
 }

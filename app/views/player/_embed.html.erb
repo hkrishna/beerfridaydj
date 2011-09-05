@@ -7,11 +7,11 @@
   var params = { allowScriptAccess: "always", wmode: "transparent", allowFullScreen: "true" };
   var atts = { id: "myytplayer" };
   swfobject.embedSWF("http://www.youtube.com/e/<%= @video.youtube_id %>?enablejsapi=1&version=3&playerapiid=myytplayer",
-                     "ytapiplayer", "425", "356", "8", null, null, params, atts);
+                     "ytapiplayer", "853", "510", "8", null, null, params, atts);
 </script>
 <div id="attribution">
   <strong class="video-title"><%= @video.title %></strong>
   as added by
   <strong class="user-name"><%= @user.display_name %></strong>
 </div>
-<%= button_to_function('Skip!', 'playNext()', :class => "btn primary") %>
+<%= button_to_function('Skip this song', 'playNext()', :class => "btn primary") %>
