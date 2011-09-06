@@ -2,16 +2,25 @@
 <div id="ytapiplayer">
   You need Flash player 8+ and JavaScript enabled to view this video.
 </div>
-<script type="text/javascript">
-  seenVideos.push("<%= @video.youtube_id %>");
-  var params = { allowScriptAccess: "always", wmode: "transparent", allowFullScreen: "true" };
-  var atts = { id: "myytplayer" };
-  swfobject.embedSWF("http://www.youtube.com/e/<%= @video.youtube_id %>?enablejsapi=1&version=3&playerapiid=myytplayer",
-                     "ytapiplayer", "853", "510", "8", null, null, params, atts);
-</script>
-<div id="attribution">
-  <strong class="video-title"><%= @video.title %></strong>
-  as added by
-  <strong class="user-name"><%= @user.display_name %></strong>
-</div>
-<%= button_to_function('Skip this song', 'playNext()', :class => "btn primary") %>
+
+<%- unless @video.nil? || @user.nil? %>
+  <script type="text/javascript">
+    seenVideos.push("<%= @video.youtube_id %>");
+    var params = { allowScriptAccess: "always", wmode: "transparent", allowFullScreen: "true" };
+    var atts = { id: "myytplayer" };
+    swfobject.embedSWF("http://www.youtube.com/e/<%= @video.youtube_id %>?enablejsapi=1&version=3&playerapiid=myytplayer",
+                       "ytapiplayer", "853", "510", "8", null, null, params, atts);
+  </script>
+  <div id="attribution">
+    <strong class="video-title"><%= @video.title %></strong>
+    as added by
+    <strong class="user-name"><%= @user.display_name %></strong>
+  </div>
+  <%= button_to_function('Skip this song', 'playNext()', :class => "btn primary") %>
+<%- else %>
+  <script type="text/javascript">
+    document.getElementById("ytapiplayer").innerHTML = '<div id="end_of_playlist" class="alert-message notice"><p><strong>All the Videos in the Playlist have been played.</strong></p></div>'
+  </script>
+  <%= button_to_function('Try again', 'playNext()', :class => "btn primary") %>
+  <%= button_to_function('Encore', 'location.reload(true)', :class => "btn") %>
+<%- end %>

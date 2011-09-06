@@ -31,8 +31,10 @@ class PlayerController < ApplicationController
 
     videos = videos.group_by(&:user)
 
-    @user  = videos.keys.sample
-    @video = videos[@user].sample
+    unless videos.blank?
+      @user  = videos.keys.sample
+      @video = videos[@user].sample
+    end
   end
 
 end

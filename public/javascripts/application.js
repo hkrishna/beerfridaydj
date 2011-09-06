@@ -102,9 +102,7 @@ function updatePlaylist(){
     var video_stat_container = document.getElementById("video_stat"),
         last_index = document.getElementById("last_index");
     last_index.innerHTML=total_video_count;
-    if (seen_video_count==1){
-      video_stat_container.className = video_stat_container.className.replace(/\b hidden\b/,'');
-    }
+    video_stat_container.className = video_stat_container.className.replace(/\b hidden\b/,'');
   }
 }
 
