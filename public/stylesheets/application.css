@@ -79,6 +79,10 @@ ul.unstyled li.adjustHeight .selected label.adjustPosition{
   margin-top:10px;
 }
 
+.clear{
+  clear:both;
+}
+
 #form_fields_block input.xlarge{
   width:375px;
 }

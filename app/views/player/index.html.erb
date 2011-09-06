@@ -1,30 +1,32 @@
 <section id="player_container">
-  <div class="page-header">
-    <h3 class="hidden">Let's Party!</h3>
-  </div>
-  <div>
+  <div class="clear">
+    <div class="page-header"></div>
     <div id="player" class="align-center clearfix">
       <%= button_to_function('Play', 'playNext()', :class => "btn primary float-left") %>
     </div>
     <div id="user-list_container">
-      <h5 class="legroom">
+      <h5 class="legroom float-left">
         People in the Room
         <small>
           <span>[</span>
-          <a href="#" onclick="return selectAll(true)">All</a>
+          <a href="#" onclick="return selectUsers('all')">All</a>
           <span>|</span>
-          <a href="#" onclick="return selectSome()">Some</a>
+          <a href="#" onclick="return selectUsers('some')">Some</a>
           <span>|</span>
-          <a href="#" onclick="return selectAll(false)">None</a>
+          <a href="#" onclick="return selectUsers('none')">None</a>
           <span>]</span>
         </small>
       </h5>
+      <h6 id="video_stat" class="float-right hidden">
+        Playlist has <span id="last_index"></span> videos
+      </h6>
+      <div class="clear"></div>
       <form id="guest_list" name="guest_list" class="form-stacked">
         <ul class="unstyled row">
         <%- @users.each do |user| %>
           <li class="adjustHeight span4">
             <div class="input-prepend selected">
-              <label class="add-on active spl"><%= check_box_tag(user.display_name, user.id, true, :name => "live", :onclick => "toggleClass(this)") %></label>
+              <label class="add-on active spl"><%= check_box_tag(user.display_name, user.id, true, :name => "live", :"data-attr-count" => "#{user.videos.size}", :onclick => "toggleClass(this)") %></label>
               <%= label_tag(user.display_name, truncate(user.display_name, :length => 20), :class => "adjustPosition", :"data-attr-count" => "#{user.videos.size}", :title => "#{user.videos.size} videos") %>
             </div>
           </li>

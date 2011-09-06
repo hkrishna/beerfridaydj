@@ -46,6 +46,7 @@ function toggleClass(elem){
     parentElem.className += " active";
     grandParentElem.className += " selected";
   }
+  updatePlaylist();
 }
 
 function validateForm(){
@@ -59,19 +60,33 @@ function validateForm(){
   return true;
 }
 
-function selectAll(all){
+function selectUsers(arg){
   var elem = document.forms["guest_list"] ? document.forms["guest_list"] : false;
   if (elem) {
     var boxes = elem["live"];
     for(var i=0; i<boxes.length;i++){
-      if (all){
-        if (!boxes[i].checked){
-          boxes[i].checked = true;
-        }
-      } else {
-        if (boxes[i].checked){
-          boxes[i].checked = false;
-        }
+      switch(arg){
+        case 'all':
+          if (!boxes[i].checked){
+            boxes[i].checked = true;
+          }
+          break;
+        case 'none':
+          if (boxes[i].checked){
+            boxes[i].checked = false;
+          }
+          break;
+        case 'some':
+          var randomnumber = Math.floor(Math.random()*3),
+              videocount = boxes[i].parentNode.next().getAttribute("data-attr-count");
+          if (randomnumber<2 && videocount!=0){
+            boxes[i].checked = true;
+          } else {
+            boxes[i].checked = false;
+          }
+          break;
+        default:
+          break;
       }
       toggleClass(boxes[i]);
     }
@@ -79,20 +94,29 @@ function selectAll(all){
   return false;
 }
 
-function selectSome(){
-  var elem = document.forms["guest_list"] ? document.forms["guest_list"] : false;
-  if (elem) {
-    var boxes = elem["live"];
-    for(var i=0; i<boxes.length;i++){
-      var randomnumber = Math.floor(Math.random()*3),
-          videocount = boxes[i].parentNode.next().getAttribute("data-attr-count");
-      if (randomnumber<2 && videocount!=0){
-        boxes[i].checked = true;
-      } else {
-        boxes[i].checked = false;
-      }
-      toggleClass(boxes[i]);
+function updatePlaylist(){
+  // Adding one, because seenVideos get updated after video starts playing
+  var seen_video_count = parseInt(seenVideos.length) + 1,
+      total_video_count = totalVideos();
+  if (document.getElementById){
+    var video_stat_container = document.getElementById("video_stat"),
+        last_index = document.getElementById("last_index");
+    last_index.innerHTML=total_video_count;
+    if (seen_video_count==1){
+      video_stat_container.className = video_stat_container.className.replace(/\b hidden\b/,'');
     }
   }
-  return false;
+}
+
+function totalVideos() {
+  var selected_videos = selectedVideos(),
+      count=0;
+  for (var i=0; i<selected_videos.length;i++){
+    count+=parseInt(selected_videos[i],10);
+  }
+  return count;
+}
+
+function selectedVideos() {
+  return $$('input[type=checkbox]').select(function(e) { return e.checked; }).map(function(e) { return e.getAttribute("data-attr-count"); });
 }
