@@ -22,5 +22,5 @@
     document.getElementById("ytapiplayer").innerHTML = '<div id="end_of_playlist" class="alert-message notice"><p><strong>All the Videos in the Playlist have been played.</strong></p></div>'
   </script>
   <%= button_to_function('Try again', 'playNext()', :class => "btn primary") %>
-  <%= button_to_function('Encore', 'location.reload(true)', :class => "btn") %>
+  <%= button_to_function('Encore', 'clearSeenVideos()', :class => "btn") %>
 <%- end %>

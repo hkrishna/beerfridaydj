@@ -12,6 +12,11 @@ function onytplayerStateChange(stateId) {
   };
 }
 
+function clearSeenVideos(){
+  seenVideos=[];
+  playNext();
+}
+
 function playNext() {
   new Ajax.Updater('player',
                    '/player/embed?' + selectedUsersParams() + '&' + seenVideoParams(),
