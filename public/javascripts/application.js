@@ -1,5 +1,59 @@
 seenVideos = [];
 
+function callNewPlayer(){
+// Call New Youtube API
+if (!window['YT']) {var YT = {};}if (!YT.Player) {(function(){var p = document.location.protocol == 'https:' ? 'https:' : 'http:';var s = p + '//s.ytimg.com/yt/jsbin/www-playerapi-vfldznltS.js';var a = document.createElement('script');a.src = s;a.async = true;var b = document.getElementsByTagName('script')[0];b.parentNode.insertBefore(a, b);})();}
+}
+
+function onYouTubePlayerAPIReady() {
+}
+
+function onPlayerReady(event) {
+  event.target.playVideo();
+}
+
+function onPlayerStateChange(event) {
+  if (event.data == YT.PlayerState.ENDED) {
+    playNextSpl();
+  }
+}
+
+function stopVideo() {
+  player.stopVideo();
+}
+
+function onPlayerError(event) {
+  var errorMsg="";
+  switch(parseInt(event.data)){
+    case 2:
+      errorMsg = "The request contains an invalid parameter value.";
+      break;
+    case 100:
+      errorMsg = "The video requested was not found.";
+      break;
+    case 101:
+      errorMsg = "The owner of the requested video does not allow it to be played in embedded players.";
+      break;
+    default:
+      errorMsg = "Something went wrong."
+      break;
+  }
+  displayMsg(errorMsg+" Skipping this Video...","error");
+  setTimeout("playNextSpl()", 1000);
+}
+
+function displayMsg(msg, type){
+  var target = document.getElementById("ytapiplayer"),
+      close = '<a class="close" onclick="hideNotice('+"'ytapiplayer'"+');" href="#">×</a>';
+  target.className = target.className.replace(/\b error\b/,'');
+  target.className = target.className.replace(/\b hidden\b/,'');
+  target.className = target.className.replace(/\b notice\b/,'');
+  target.className += " "+type;
+  target.innerHTML = close + '<p><strong>' + msg + '</strong></p>';
+  target.style.display = "block";
+}
+
+// old stuff
 function onYouTubePlayerReady(playerid) {
   ytplayer = document.getElementById("myytplayer");
   ytplayer.addEventListener("onStateChange", "onytplayerStateChange");
@@ -12,14 +66,24 @@ function onytplayerStateChange(stateId) {
   };
 }
 
-function clearSeenVideos(){
+function clearSeenVideos(type){
   seenVideos=[];
-  playNext();
+  if(type){
+    playNextSpl();
+  } else {
+    playNext();
+  }
 }
 
 function playNext() {
   new Ajax.Updater('player',
                    '/player/embed?' + selectedUsersParams() + '&' + seenVideoParams(),
+                   {asynchronous:true, evalScripts:true});
+}
+
+function playNextSpl() {
+  new Ajax.Updater('player',
+                   '/player/embedHTML5?' + selectedUsersParams() + '&' + seenVideoParams(),
                    {asynchronous:true, evalScripts:true});
 }
 

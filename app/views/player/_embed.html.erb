@@ -1,8 +1,7 @@
 <script type="text/javascript" src="swfobject.js"></script>
-<div id="ytapiplayer">
-  You need Flash player 8+ and JavaScript enabled to view this video.
+<div id="ytapiplayer" class="alert-message notice">
+  <p><strong>You need Flash player 8+ and JavaScript enabled to view this video.</strong></p>
 </div>
-
 <%- unless @video.nil? || @user.nil? %>
   <script type="text/javascript">
     seenVideos.push("<%= @video.youtube_id %>");
@@ -17,9 +16,10 @@
     <strong class="user-name"><%= @user.display_name %></strong>
   </div>
   <%= button_to_function('Skip this song', 'playNext()', :class => "btn primary") %>
+  <%= button_to_function('Skip song & try the new player', 'playNextSpl()', :class => "btn success") %>
 <%- else %>
   <script type="text/javascript">
-    document.getElementById("ytapiplayer").innerHTML = '<div id="end_of_playlist" class="alert-message notice"><p><strong>All the Videos in the Playlist have been played.</strong></p></div>'
+    displayMsg("All the Videos in the Playlist have been played.","notice");
   </script>
   <%= button_to_function('Try again', 'playNext()', :class => "btn primary") %>
   <%= button_to_function('Encore', 'clearSeenVideos()', :class => "btn") %>

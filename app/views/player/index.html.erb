@@ -1,8 +1,12 @@
+<script type="text/javascript">
+  callNewPlayer();
+</script>
 <section id="player_container">
   <div class="clear">
     <div class="page-header"></div>
     <div id="player" class="align-center clearfix">
-      <%= button_to_function('Play', 'playNext()', :class => "btn primary float-left") %>
+      <%= button_to_function('Play', 'playNext()', :class => "btn primary") %>
+      <%= button_to_function('Try the New Player', 'playNextSpl()', :class => "btn success") %>
     </div>
     <div id="user-list_container">
       <h5 class="legroom float-left">

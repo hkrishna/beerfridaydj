@@ -1,0 +1,34 @@
+<div id="ytapiplayer" class="alert-message notice hidden">
+</div>
+<div id="ytplayer"></div>
+<%- unless @video.nil? || @user.nil? %>
+  <script type="text/javascript">
+    seenVideos.push("<%= @video.youtube_id %>");
+    var params = { allowScriptAccess: "always", wmode: "transparent", allowFullScreen: "true" },
+        player = new YT.Player('ytplayer', {
+          height: '510',
+          width: '853',
+          videoId: '<%= @video.youtube_id%>',
+          playerVars: params,
+          events: {
+            'onReady': onPlayerReady,
+            'onStateChange': onPlayerStateChange,
+            'onError': onPlayerError
+          }
+        });
+  </script>
+
+  <div id="attribution">
+    <strong class="video-title"><%= @video.title %></strong>
+    as added by
+    <strong class="user-name"><%= @user.display_name %></strong>
+  </div>
+  <%= button_to_function('Skip this song', 'playNextSpl()', :class => "btn primary") %>
+  <%= button_to_function('Skip song & switch to basic player', 'playNext()', :class => "btn success") %>
+<%- else %>
+  <script type="text/javascript">
+    displayMsg("All the Videos in the Playlist have been played.","notice");
+  </script>
+  <%= button_to_function('Try again', 'playNextSpl()', :class => "btn primary") %>
+  <%= button_to_function('Encore', 'clearSeenVideos("spl")', :class => "btn") %>
+<%- end %>

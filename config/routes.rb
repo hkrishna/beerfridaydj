@@ -5,6 +5,7 @@ BeerFridayDJ::Application.routes.draw do
 
   match 'player' => 'player#index'
   match 'player/embed' => 'player#embed'
+  match 'player/embedHTML5' => 'player#embedHTML5'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
