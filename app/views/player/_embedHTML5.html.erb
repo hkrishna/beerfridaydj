@@ -4,7 +4,7 @@
 <%- unless @video.nil? || @user.nil? %>
   <script type="text/javascript">
     seenVideos.push("<%= @video.youtube_id %>");
-    var params = { allowScriptAccess: "always", wmode: "transparent", allowFullScreen: "true" },
+    var params = { 'autoplay': 1, allowScriptAccess: "always", wmode: "transparent", allowFullScreen: "true" },
         player = new YT.Player('ytplayer', {
           height: '510',
           width: '853',
