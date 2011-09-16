@@ -1,6 +1,6 @@
 class PlayerController < ApplicationController
 
-  before_filter(:select_song, :only => [:embed, :embedHTML5])
+  before_filter(:select_song, :only => :embed)
 
   def index
     @users = User.all(:order => 'email ASC')
@@ -8,10 +8,6 @@ class PlayerController < ApplicationController
 
   def embed
     render(:partial => 'embed')
-  end
-
-  def embedHTML5
-    render(:partial => 'embedHTML5')
   end
 
   private

@@ -14,7 +14,7 @@ function onPlayerReady(event) {
 
 function onPlayerStateChange(event) {
   if (event.data == YT.PlayerState.ENDED) {
-    playNextSpl();
+    playNext();
   }
 }
 
@@ -39,7 +39,7 @@ function onPlayerError(event) {
       break;
   }
   displayMsg(errorMsg+" Skipping this Video...","error");
-  setTimeout("playNextSpl()", 1000);
+  setTimeout("playNext()", 1000);
 }
 
 function displayMsg(msg, type){
@@ -53,37 +53,14 @@ function displayMsg(msg, type){
   target.style.display = "block";
 }
 
-// old stuff
-function onYouTubePlayerReady(playerid) {
-  ytplayer = document.getElementById("myytplayer");
-  ytplayer.addEventListener("onStateChange", "onytplayerStateChange");
-  ytplayer.playVideo();
-}
-
-function onytplayerStateChange(stateId) {
-  if(stateId == 0) {
-    playNext();
-  };
-}
-
-function clearSeenVideos(type){
+function clearSeenVideos(){
   seenVideos=[];
-  if(type){
-    playNextSpl();
-  } else {
-    playNext();
-  }
+  playNext();
 }
 
 function playNext() {
   new Ajax.Updater('player',
                    '/player/embed?' + selectedUsersParams() + '&' + seenVideoParams(),
-                   {asynchronous:true, evalScripts:true});
-}
-
-function playNextSpl() {
-  new Ajax.Updater('player',
-                   '/player/embedHTML5?' + selectedUsersParams() + '&' + seenVideoParams(),
                    {asynchronous:true, evalScripts:true});
 }
 
